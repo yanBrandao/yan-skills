@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "categories": {
+    "development": {
+      "name": "Development",
+      "description": "Skills for software development workflows and project conventions"
+    }
+  },
+  "skills": [
+    {
+      "name": "kotlin-backend-ddd",
+      "description": "Use when creating, reviewing, or refactoring Kotlin Spring Boot backend code that should follow Yan's DDD package structure with adapters, application ports, services, domain-owned business logic, required service/domain unit tests, and logger usage in service/domain classes. Trigger when the user mentions Kotlin backend DDD, Spring Boot project structure, adapters input/output, use cases, repository ports, publisher ports, consumers, service/domain tests, or logging in this style. Do NOT use for frontend work, non-Kotlin services, generic CRUD-only code without architecture concerns, or DDD approaches that intentionally differ from this package convention.",
+      "category": "development",
+      "path": "(development)/kotlin-backend-ddd",
+      "files": [
+        "SKILL.md",
+        "references/package-layout.md",
+        "references/patterns.md"
+      ],
+      "author": "Yan",
+      "version": "1.0.0",
+      "contentHash": "1c83c3080f12ed1877333236a4b8ab5b38f7e00f230156ecb57b0c1c5155571b"
+    }
+  ]
+}

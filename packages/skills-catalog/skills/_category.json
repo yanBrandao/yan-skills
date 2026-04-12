@@ -1,0 +1,18 @@
+{
+  "(development)": {
+    "name": "Development",
+    "description": "Skills for software development workflows and project conventions"
+  },
+  "(architecture)": {
+    "name": "Architecture",
+    "description": "Skills for software architecture, patterns, and system design"
+  },
+  "(quality)": {
+    "name": "Quality",
+    "description": "Skills for code quality, testing, and review practices"
+  },
+  "(tooling)": {
+    "name": "Tooling",
+    "description": "Skills for developer tooling and automation"
+  }
+}

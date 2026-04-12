@@ -1,0 +1,11 @@
+{
+  "name": "@yan/skills-catalog",
+  "version": "0.1.0",
+  "description": "Personal skills catalog registry",
+  "type": "module",
+  "private": true,
+  "files": [
+    "skills-registry.json",
+    "skills/"
+  ]
+}

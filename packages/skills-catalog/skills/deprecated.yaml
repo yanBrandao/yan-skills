@@ -1,0 +1,9 @@
+# Deprecated skills
+#
+# Format:
+#   - name: old-skill
+#     message: Human-readable reason for deprecation
+#     alternatives:
+#       - replacement-skill
+
+[]
