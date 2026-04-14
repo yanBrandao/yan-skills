@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Expanded `README.md` with DDD explanation, layer responsibilities diagram, package layout, and test strategy sections for `kotlin-backend-ddd`.
+
 ## [0.2.0] - 2026-04-14
 
 ### Changed
