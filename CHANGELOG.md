@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-14
+
 ### Changed
 
 - Expanded `README.md` with DDD explanation, layer responsibilities diagram, package layout, and test strategy sections for `kotlin-backend-ddd`.
+- Simplified port path references in `README.md` from `application.port.input.usecase` / `application.port.output.port` to `application.port.input` / `application.port.output` for readability.
+- Simplified package layout tree in `README.md` to show `input/` and `output/` directly under `port/` without the extra `usecase/` and `port/` subdirectories.
+- Added DDD architecture diagram reference (`docs/ddd.png`) to `README.md`.
 
 ## [0.2.0] - 2026-04-14
 
@@ -40,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `validate` script to enforce skill frontmatter rules (kebab-case name, trigger/negative-scope description, no README, all references cited).
 - `generate:registry` script to produce `skills-registry.json` from current skill files.
 
-[Unreleased]: https://github.com/yanBrandao/yan-skills/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/yanBrandao/yan-skills/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/yanBrandao/yan-skills/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/yanBrandao/yan-skills/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/yanBrandao/yan-skills/releases/tag/v0.1.0

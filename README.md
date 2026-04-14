@@ -20,6 +20,8 @@ Guides Claude Code when creating, reviewing, or refactoring Kotlin Spring Boot s
 
 Domain-Driven Design (DDD) is an approach to software development that centers the codebase on the business domain rather than on technical concerns. The core idea is that the code should reflect the language and rules of the business — so when a business rule changes, there is one clear place in the code that owns that rule.
 
+![DDD Architecture](docs/ddd.png)
+
 In practice this means:
 
 - **Domain classes own business decisions.** A `Some` domain class knows how to validate itself, transition its own state, and call ports when it needs to persist or publish. Services should not reach into domain objects and manipulate their data directly.
@@ -31,22 +33,20 @@ In practice this means:
 Each layer has a single responsibility and a strict dependency direction:
 
 ```
-adapter.input  ──►  application.port.input.usecase
+adapter.input  ──►  application.port.input
                               │
                     application.service
                        │             │
-              application.domain   application.port.output.port
-                                             │
-                                      adapter.output
+              application.domain   application.port.output
 ```
 
 | Layer | Lives in | Responsibility |
 |---|---|---|
 | Input adapter | `adapter.input.web`, `adapter.input.consumers` | Translate HTTP or message events into use case calls |
-| Use case port | `application.port.input.usecase` | Define what operations the application exposes |
+| Use case port | `application.port.input` | Define what operations the application exposes |
 | Service | `application.service` | Orchestrate ports and domain objects, implement use cases |
 | Domain | `application.domain` | Own business rules, decisions, and state transitions |
-| Output port | `application.port.output.port` | Define what the application needs from infrastructure |
+| Output port | `application.port.output` | Define what the application needs from infrastructure |
 | Output adapter | `adapter.output.repository`, `adapter.output.publishers` | Implement output ports using real infrastructure |
 
 This layering means:
@@ -69,10 +69,8 @@ adapter/
 application/
   domain/             ← domain classes, value objects, predicates
   port/
-    input/
-      usecase/        ← use case interfaces
-    output/
-      port/           ← output port interfaces
+    input/            ← use case interfaces
+    output/           ← output port interfaces
   service/            ← Spring services
 ```
 
