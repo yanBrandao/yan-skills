@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Publish workflow updated to use npm trusted publisher (OIDC provenance) instead of a stored `NPM_TOKEN` secret. Requires `id-token: write` permission and `--provenance --access public` on `npm publish`.
 - Fixed `bin` name from `yan-skills` to `yanskills` — npm does not allow hyphens in binary names.
+- Set executable bit on `bin/install.mjs` to silence npm bin cleaning warning during publish.
 
 ### Added
 
