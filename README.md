@@ -33,11 +33,17 @@ In practice this means:
 Each layer has a single responsibility and a strict dependency direction:
 
 ```
-adapter.input  ──►  application.port.input
+adapter.input  ──►  application.port.input (usecase interfaces)
                               │
-                    application.service
+                    application.service (usecase implementations)
                        │             │
-              application.domain   application.port.output
+              application.domain   application.port.output (output interfaces)
+                                             │
+                                      adapter.output
+                                             │
+                            -----------------│-----------------
+                            │                │                │
+                      repository       publishers     feign-clients
 ```
 
 | Layer | Lives in | Responsibility |
