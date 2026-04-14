@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-14
+
 ### Added
 
-- GitHub Actions workflow (`.github/workflows/validate-pr.yml`) that blocks merges to `main` when `CHANGELOG.md` was not updated and when skill frontmatter validation fails.
-- Changelog authoring rule in `CLAUDE.md` requiring every PR to include a `CHANGELOG.md` entry.
+- GitHub Actions publish workflow (`.github/workflows/publish.yml`) that triggers on every merge to `main`, reads the latest version from `CHANGELOG.md`, publishes to npm, and creates a GitHub release. Skips if the version is already published.
+- GitHub Actions PR validation workflow (`.github/workflows/validate-pr.yml`) that blocks merges to `main` when `CHANGELOG.md` was not updated and when skill frontmatter validation fails.
+- Branching rule in `CLAUDE.md` requiring all work on feature branches, never committing directly to `main`.
+- Changelog authoring rule in `CLAUDE.md` explaining how to promote `[Unreleased]` to a versioned entry before merging, making the changelog the single source of truth for releases.
 
 ## [0.1.0] - 2026-04-14
 
@@ -26,5 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `validate` script to enforce skill frontmatter rules (kebab-case name, trigger/negative-scope description, no README, all references cited).
 - `generate:registry` script to produce `skills-registry.json` from current skill files.
 
-[Unreleased]: https://github.com/yanBrandao/yan-skills/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/yanBrandao/yan-skills/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/yanBrandao/yan-skills/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/yanBrandao/yan-skills/releases/tag/v0.1.0

@@ -1,0 +1,74 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Extract version from CHANGELOG.md
+        id: changelog
+        run: |
+          VERSION=$(grep -m1 '^## \[[0-9]' CHANGELOG.md | sed 's/## \[\([^]]*\)\].*/\1/')
+          if [ -z "$VERSION" ]; then
+            echo "No released version found in CHANGELOG.md — skipping publish."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if version is already published
+        if: steps.changelog.outputs.skip == 'false'
+        id: check
+        run: |
+          VERSION=${{ steps.changelog.outputs.version }}
+          if npm view yan-skills@$VERSION version 2>/dev/null | grep -q "$VERSION"; then
+            echo "Version $VERSION is already published — skipping."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set version in package.json
+        if: steps.check.outputs.skip == 'false'
+        run: npm version ${{ steps.changelog.outputs.version }} --no-git-tag-version
+
+      - name: Publish to npm
+        if: steps.check.outputs.skip == 'false'
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract release notes from CHANGELOG.md
+        if: steps.check.outputs.skip == 'false'
+        id: notes
+        run: |
+          VERSION=${{ steps.changelog.outputs.version }}
+          NOTES=$(awk "/^## \[$VERSION\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md)
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub release
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          gh release create "v${{ steps.changelog.outputs.version }}" \
+            --title "v${{ steps.changelog.outputs.version }}" \
+            --notes "${{ steps.notes.outputs.notes }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

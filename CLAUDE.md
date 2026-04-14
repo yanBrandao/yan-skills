@@ -63,12 +63,31 @@ Add an entry to `packages/skills-catalog/skills/deprecated.yaml`:
   message: Human-readable reason for deprecation
 ```
 
+## Branching
+
+Never commit directly to `main`. All work must happen on a feature branch and reach `main` only through a pull request.
+
+```
+main          ← protected, never commit here directly
+feature/...   ← all development work
+```
+
 ## Changelog
 
 Every change that touches a skill, the installer, or the catalog tooling must include a `CHANGELOG.md` update. The PR pipeline enforces this — merges to `main` are blocked if `CHANGELOG.md` was not modified.
 
 - Add new entries under the `## [Unreleased]` section.
 - Use the appropriate subsection: `Added`, `Changed`, `Fixed`, or `Removed`.
-- When a version is released, replace `[Unreleased]` with the version and date and add a fresh `## [Unreleased]` section above it.
+- Before merging to `main`, promote `[Unreleased]` to a versioned entry and add a fresh `## [Unreleased]` section above it:
+
+```markdown
+## [Unreleased]
+
+## [0.2.0] - 2026-04-14
+### Added
+- ...
+```
+
+The publish pipeline reads the first versioned entry in `CHANGELOG.md`, sets that version in `package.json`, publishes to npm, and creates a GitHub release — so the version in the changelog is the single source of truth for what gets released.
 
 Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
