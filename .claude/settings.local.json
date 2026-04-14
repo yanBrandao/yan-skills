@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(git -C /mnt/d/Developer/yan-skills status)",
+      "Bash(git -C /mnt/d/Developer/yan-skills diff)",
+      "Bash(git -C /mnt/d/Developer/yan-skills log --oneline -5)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)",
+      "Bash(git push:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(gh run:*)",
+      "Bash(chmod +x /mnt/d/Developer/yan-skills/bin/install.mjs)"
+    ]
+  }
+}

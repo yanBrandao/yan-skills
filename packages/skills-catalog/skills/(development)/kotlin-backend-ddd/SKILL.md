@@ -31,6 +31,8 @@ Load `references/package-layout.md` when creating or reorganizing folders. Load 
 Use this default layout inside a bounded context or feature package:
 
 ```text
+configuration/
+  (configuration)
 adapter/
   input/
     web/
@@ -43,9 +45,9 @@ application/
   domain/
   port/
     input/
-      usecase/
+      (usecase)
     output/
-      port/
+      (port)
   service/
 ```
 
@@ -54,8 +56,8 @@ application/
 - Put web controllers and message consumers in `adapter.input`.
 - Put persistence, publisher, documentation, and external integration implementations in `adapter.output`.
 - Put domain classes in `application.domain`.
-- Put use case interfaces in `application.port.input.usecase`.
-- Put output port interfaces in `application.port.output.port`.
+- Put use case interfaces in `application.port.input`.
+- Put output port interfaces in `application.port.output`.
 - Put Spring services in `application.service`.
 - Let services inject output ports and implement input use cases.
 - Let domain classes own decisions, validations, state transitions, and business predicates.
