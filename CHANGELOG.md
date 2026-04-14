@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.0] - 2026-04-14
 
+### Changed
+
+- Publish workflow updated to use npm trusted publisher (OIDC provenance) instead of a stored `NPM_TOKEN` secret. Requires `id-token: write` permission and `--provenance --access public` on `npm publish`.
+
 ### Added
 
 - GitHub Actions publish workflow (`.github/workflows/publish.yml`) that triggers on every merge to `main`, reads the latest version from `CHANGELOG.md`, publishes to npm, and creates a GitHub release. Skips if the version is already published.
