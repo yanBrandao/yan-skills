@@ -1,0 +1,37 @@
+name: Validate PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  changelog:
+    name: Changelog updated
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check CHANGELOG.md was modified
+        run: |
+          git diff --name-only origin/main...HEAD | grep -q "^CHANGELOG.md$" || {
+            echo "❌ CHANGELOG.md was not updated."
+            echo "Add an entry under [Unreleased] before merging."
+            exit 1
+          }
+          echo "✅ CHANGELOG.md is updated."
+
+  validate-skills:
+    name: Validate skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate skill frontmatter
+        run: npm run validate

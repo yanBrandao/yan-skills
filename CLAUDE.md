@@ -39,7 +39,7 @@ description: ...          # max 1024 chars; must include trigger guidance and ne
 license: CC-BY-4.0
 metadata:
   author: Yan
-  version: "1.0.0"
+  version: "0.1.0"
 ---
 ```
 
@@ -62,3 +62,13 @@ Add an entry to `packages/skills-catalog/skills/deprecated.yaml`:
 - name: old-skill-name
   message: Human-readable reason for deprecation
 ```
+
+## Changelog
+
+Every change that touches a skill, the installer, or the catalog tooling must include a `CHANGELOG.md` update. The PR pipeline enforces this — merges to `main` are blocked if `CHANGELOG.md` was not modified.
+
+- Add new entries under the `## [Unreleased]` section.
+- Use the appropriate subsection: `Added`, `Changed`, `Fixed`, or `Removed`.
+- When a version is released, replace `[Unreleased]` with the version and date and add a fresh `## [Unreleased]` section above it.
+
+Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
