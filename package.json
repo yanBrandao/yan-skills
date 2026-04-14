@@ -1,9 +1,16 @@
 {
   "name": "yan-skills",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "Personal agent skills catalog",
+  "bin": {
+    "yan-skills": "./bin/install.mjs"
+  },
+  "files": [
+    "bin/",
+    "packages/skills-catalog/skills/",
+    "packages/skills-catalog/skills-registry.json"
+  ],
   "scripts": {
     "generate:registry": "node tools/generate-registry.mjs",
     "validate": "node tools/validate-skills.mjs"
@@ -11,7 +18,9 @@
   "keywords": [
     "agents",
     "ai",
-    "skills"
+    "skills",
+    "claude",
+    "claude-code"
   ],
   "license": "MIT"
 }
