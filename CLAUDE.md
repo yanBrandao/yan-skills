@@ -72,6 +72,8 @@ main          ← protected, never commit here directly
 feature/...   ← all development work
 ```
 
+Do not consider a task finished until the pipeline triggered by the merge has completed successfully. Check the Actions tab on GitHub after every merge — if any job fails, investigate and fix it before moving on.
+
 ## Changelog
 
 Every change that touches a skill, the installer, or the catalog tooling must include a `CHANGELOG.md` update. The PR pipeline enforces this — merges to `main` are blocked if `CHANGELOG.md` was not modified.
@@ -91,3 +93,14 @@ Every change that touches a skill, the installer, or the catalog tooling must in
 The publish pipeline reads the first versioned entry in `CHANGELOG.md`, sets that version in `package.json`, publishes to npm, and creates a GitHub release — so the version in the changelog is the single source of truth for what gets released.
 
 Format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
+
+## npm publish — first-time setup
+
+The publish pipeline uses npm trusted publishers (OIDC) and requires the package to already exist on the registry. Before the pipeline can publish automatically, run the first publish manually from your local machine:
+
+```bash
+npm version <version> --no-git-tag-version
+npm publish --access public
+```
+
+After that, all future releases are handled by the pipeline on every merge to `main`.
